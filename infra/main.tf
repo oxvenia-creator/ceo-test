@@ -63,3 +63,14 @@ resource "aws_db_instance" "ceo_test_db" {
   storage_encrypted = false
   skip_final_snapshot = true
 }
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "ceo_test_artifacts" {
+  bucket = aws_s3_bucket.ceo_test_artifacts.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "AES256"
+      bucket_key_enabled = true
+    }
+    bucket_key_enabled = true
+  }
+}
