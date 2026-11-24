@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oxvenia-sample-app
+  labels:
+    app: oxvenia-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oxvenia-sample-app
+  template:
+    metadata:
+      labels:
+        app: oxvenia-sample-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
